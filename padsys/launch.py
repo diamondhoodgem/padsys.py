@@ -2,7 +2,8 @@ import json
 import launchpad_py as launchpad
 import time
 import logging
-
+from akai_pro_py import controllers
+from scipy.interpolate import interp1d
 
 colours = {"off":[0,False], "red":[5,False], "orange":[9,False], "yellow":[13,False], "green":[21,False], "cyan":[37,False], "blue":[45,False], "magenta":[53,False], "uv":[49,False], "white":[3,False], "flash_red":[5,True], "flash_orange":[9,True], "flash_yellow":[13,True], "flash_green":[21,True], "flash_cyan":[37,True], "flash_blue":[45,True], "flash_magenta":[53,True], "flash_uv":[49,True], "flash_white":[3,True], "light_red":[4,False], "light_orange":[8,False], "light_yellow":[12,False], "light_green":[20,False], "light_cyan":[36,False], "light_blue":[44,False], "light_magenta":[52,False], "light_uv":[48,False], "light_white":[1,False]}
 settable = ['off', 'white', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'magenta', 'uv']
@@ -21,6 +22,8 @@ class Launchpad_wrapper:
         self.mode = None
         # create an instance
         self.lp = launchpad.Launchpad();
+        self.apc = controllers.APCMini('APC MINI MIDI 1', 'APC MINI MIDI 1')
+
 
         # check for available launchpads
         if self.lp.Check( padnum, "pro" ):
@@ -29,7 +32,11 @@ class Launchpad_wrapper:
                 logging.critical("Launchpad Pro Detected, but not supported")
                 self.mode = "pro"
                 exit()
-                
+        elif self.apc
+            
+
+
+        
         elif self.lp.Check( padnum, "mk2" ):
             self.lp = launchpad.LaunchpadMk2()
             if self.lp.Open( padnum, "mk2" ):
